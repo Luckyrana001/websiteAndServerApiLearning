@@ -1,65 +1,107 @@
-Website And Server Api Learning
+# Website and Server API Learning
 
-http://localhost:5000
-http://127.0.0.1:5000
+A learning project containing a React client and an Express/MongoDB API server.
 
-# create directories
+## Local URLs
 
-mkdir controller
-mkdir users
+- API server: <http://127.0.0.1:5003>
+- Users API: <http://127.0.0.1:5003/api/users>
 
-# create files touch command
+## Project Structure
 
-touch src/controllers/userController.js
-
-# all together touch command
-
-touch .env
-src/app.js
-src/server.js
-src/routes/userRoutes.js
-src/controllers/userController.js
-src/models/User.js
-src/config/database.js
-
-
-# User Api end point
-
-http://localhost:5003/api/users
-
-**Mongo Db Config:**
-
-* `127.0.0.1` = your own computer ip address
-* `27017` = MongoDB's default port
-* `website_api_learning` = database name
-
-# Install Local computer Mongo Db using Homebrew
-
-brew **--version**
-
-# the MongoDB Homebrew repository
-
-brew tap mongodb/brew
-
-# Install MongoDB Community Edition
-
-brew install mongodb-community
-
-# After installation, start MongoDB:
-
-brew services start mongodb-community
-
-# Start Server again
-
-npm run dev
-
-# Open below url in chrome browser
-
-http://localhost:5003/api/users
-
-Response:
-
+```text
+.
+├── client/
+└── server/
+    ├── src/
+    │   ├── config/
+    │   ├── controllers/
+    │   ├── middleware/
+    │   ├── models/
+    │   ├── repositories/
+    │   ├── routes/
+    │   ├── services/
+    │   └── server.js
+    └── package.json
 ```
+
+## Prerequisites
+
+- Node.js and npm
+- MongoDB Community Edition
+
+## Server Setup
+
+### Install dependencies
+
+From the project root, run:
+
+```bash
+npm install
+```
+
+If dependencies have not been installed for the server yet, run:
+
+```bash
+cd server
+npm install
+cd ..
+```
+
+### Configure MongoDB
+
+Create `server/.env` with your MongoDB connection string:
+
+```env
+MONGODB_URI=mongodb://127.0.0.1:27017/website_api_learning
+PORT=5003
+```
+
+MongoDB connection details:
+
+- `127.0.0.1` is your local computer.
+- `27017` is MongoDB’s default port.
+- `website_api_learning` is the database name.
+
+### Install MongoDB with Homebrew
+
+Check that Homebrew is installed:
+
+```bash
+brew --version
+```
+
+Install and start MongoDB Community Edition:
+
+```bash
+brew tap mongodb/brew
+brew install mongodb-community
+brew services start mongodb-community
+```
+
+### Start the server
+
+From the project root:
+
+```bash
+npm run dev
+```
+
+The server should be available at <http://127.0.0.1:5003>.
+
+## Users API
+
+### Get all users
+
+Open <http://127.0.0.1:5003/api/users> in a browser or run:
+
+```bash
+curl http://127.0.0.1:5003/api/users
+```
+
+Example response:
+
+```json
 {
   "success": true,
   "count": 0,
@@ -67,19 +109,21 @@ Response:
 }
 ```
 
-# To add new user , run this curl command in terminal
+### Create a user
 
-```
-curl -X POST http://localhost:5003/api/users -H "Content-Type: application/json" -d '{
-  "name": "Lucky Rana",
-  "email": "lucky@example.com",
-  "age": 28
-}'
+```bash
+curl -X POST http://127.0.0.1:5003/api/users \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Lucky Rana",
+    "email": "lucky@example.com",
+    "age": 28
+  }'
 ```
 
-#Response
+Example response:
 
-```
+```json
 {
   "success": true,
   "message": "User created successfully",
@@ -92,33 +136,44 @@ curl -X POST http://localhost:5003/api/users -H "Content-Type: application/json"
 }
 ```
 
-# Open / Refresh Api url again in chrome browser
+## Run the Client and Server
 
-![1785212370742](image/README/1785212370742.png)
+Start the server with `npm run dev`, then start the client from the `client` directory using its development script:
 
-# run both Client and Server and you will get below result:
+```bash
+cd client
+npm run dev
+```
 
-![1785215284784](image/README/1785215284784.png)
+After both applications are running, open the client URL shown in the terminal.
 
+![Users API response](image/README/1785212370742.png)
 
-Server already running issue debugging and kill all open port PID
+![Client and server running](image/README/1785215284784.png)
 
+## Troubleshooting
 
-# Search running server and kill PID
+If the server is already running or port `5003` is in use, find the process listening on the port:
 
+```bash
 lsof -nP -iTCP:5003 -sTCP:LISTEN
+```
 
-# kill server
+Stop the process using its PID:
 
-kill 86508
+```bash
+kill <PID>
+```
 
-kill -9 86508
+If necessary, force-stop it:
 
+```bash
+kill -9 <PID>
+```
+
+You can also stop server processes started with Node or Nodemon:
+
+```bash
 sudo pkill -f "nodemon src/server.js"
 sudo pkill -f "node src/server.js"
-
-Test api is available:
-
-**curl**"http://127.0.0.1:5003/api/users"
-
-<pre class="overflow-visible! px-0!" data-start="290" data-end="463"><div class="relative w-full mt-4 mb-1"><div class=""><div class="contents"><div class="border border-token-border-light border-radius-3xl corner-superellipse/1.1 rounded-3xl"><div class="relative h-full w-full border-radius-3xl bg-(--code-block-surface) corner-superellipse/1.1 overflow-clip rounded-3xl [--code-block-surface:var(--bg-elevated-secondary)] dark:[--code-block-surface:var(--composer-surface-primary)] lxnfua_clipPathFallback"><div class="pointer-events-none absolute inset-x-4 top-12 bottom-4"><div class="pointer-events-none sticky z-40 shrink-0 z-1!"><div class="sticky bg-token-border-light"></div></div></div></div></div></div></div></div></pre>
+```
