@@ -1,4 +1,4 @@
-# Website and Server API Learning
+# Website Client Api consumer and Server DB data API expose Learning
 
 A learning project containing a React client and an Express/MongoDB API server.
 
