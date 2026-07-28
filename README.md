@@ -1,4 +1,4 @@
-# Website Client Api consumer and Server DB data API expose Learning
+# Sample Web-page with customer Form (Add,Update,Delete Operation through Api)  and Server side API development and expose to webpage / mobile app Learning
 
 A learning project containing a React client and an Express/MongoDB API server.
 
