@@ -151,6 +151,9 @@ After both applications are running, open the client URL shown in the terminal.
 
 ![Client and server running](image/README/1785215284784.png)
 
+![Mongo Db data view](image/README/mongo_db_image.png)
+
+
 ## Troubleshooting
 
 If the server is already running or port `5003` is in use, find the process listening on the port:
@@ -177,3 +180,5 @@ You can also stop server processes started with Node or Nodemon:
 sudo pkill -f "nodemon src/server.js"
 sudo pkill -f "node src/server.js"
 ```
+
+
