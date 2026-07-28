@@ -1,15 +1,21 @@
 require("dotenv").config();
 
 const app = require("./app");
+const connectDatabase = require("./config/database");
 
-const PORT = Number(process.env.PORT) || 5000;
-const HOST = process.env.HOST || "localhost";
+const PORT = process.env.PORT || 5003;
 
-const server = app.listen(PORT, HOST, () => {
-  console.log(`🚀 Server started on http://${HOST}:${PORT}`);
-});
+async function startServer() {
+  try {
+    await connectDatabase();
 
-server.on("error", (error) => {
-  console.error("❌ Server failed to start:", error.message);
-  process.exitCode = 1;
-});
+    app.listen(PORT, "127.0.0.1", () => {
+      console.log(`Server running at http://127.0.0.1:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Server startup failed:", error);
+    process.exit(1);
+  }
+}
+
+startServer();

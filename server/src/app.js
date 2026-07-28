@@ -1,18 +1,22 @@
 const express = require("express");
 const cors = require("cors");
 
-const app = express();
 const userRoutes = require("./routes/userRoutes");
+
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  console.log("Root API was called");
+app.use((req, res, next) => {
+  console.log("Incoming:", req.method, req.originalUrl);
+  next();
+});
 
-  res.json({
+app.get("/", (req, res) => {
+  return res.status(200).json({
     success: true,
-    message: "Server is running",
+    message: "Server is working",
   });
 });
 
