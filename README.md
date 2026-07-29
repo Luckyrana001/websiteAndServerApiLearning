@@ -30,6 +30,10 @@ A learning project containing a React client and an Express/MongoDB API server.
 - Node.js and npm
 - MongoDB Community Edition
 
+
+# Project Workflow
+![workflow view](image/README/project-workflow.png)
+
 ## Server Setup
 
 ### Install dependencies
