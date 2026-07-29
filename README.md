@@ -55,6 +55,8 @@ Create `server/.env` with your MongoDB connection string:
 ```env
 MONGODB_URI=mongodb://127.0.0.1:27017/website_api_learning
 PORT=5003
+JWT_SECRET=replace-this-with-a-long-random-secret
+JWT_EXPIRES_IN=1h
 ```
 
 MongoDB connection details:
@@ -91,12 +93,36 @@ The server should be available at <http://127.0.0.1:5003>.
 
 ## Users API
 
+### Authentication
+
+Register or log in to receive a JWT access token. Keep `server/.env` private and use a long random value for `JWT_SECRET`.
+
+```bash
+curl -X POST http://127.0.0.1:5003/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Lucky Rana",
+    "email": "lucky@example.com",
+    "password": "secret123"
+  }'
+```
+
+Use the returned token on the users API:
+
+```bash
+curl http://127.0.0.1:5003/api/users \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+Login uses `POST /api/auth/login` with `email` and `password`. All `/api/users` endpoints require this bearer token.
+
 ### Get all users
 
 Open <http://127.0.0.1:5003/api/users> in a browser or run:
 
 ```bash
-curl http://127.0.0.1:5003/api/users
+curl http://127.0.0.1:5003/api/users \
+  -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 Example response:
@@ -180,5 +206,4 @@ You can also stop server processes started with Node or Nodemon:
 sudo pkill -f "nodemon src/server.js"
 sudo pkill -f "node src/server.js"
 ```
-
 

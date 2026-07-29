@@ -17,6 +17,12 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
 
+    password: {
+      type: String,
+      minlength: [6, "Password must contain at least 6 characters"],
+      select: false,
+    },
+
     age: {
       type: Number,
       min: [0, "Age cannot be negative"],
@@ -24,8 +30,13 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      transform(_document, returnedUser) {
+        delete returnedUser.password;
+        return returnedUser;
+      },
+    },
   }
-  
 );
 
 const User = mongoose.model("User", userSchema);
