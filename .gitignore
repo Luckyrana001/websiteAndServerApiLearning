@@ -19,3 +19,9 @@ pnpm-debug.log*
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Local SSH keys (never commit private keys)
+/keyFile
+/keyFile.pub
+/websiteAndServerApiLearning
+/websiteAndServerApiLearning.pub
