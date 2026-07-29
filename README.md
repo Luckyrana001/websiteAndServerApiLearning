@@ -57,6 +57,8 @@ MONGODB_URI=mongodb://127.0.0.1:27017/website_api_learning
 PORT=5003
 JWT_SECRET=replace-this-with-a-long-random-secret
 JWT_EXPIRES_IN=1h
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=Admin@12345
 ```
 
 MongoDB connection details:
@@ -90,6 +92,17 @@ npm run dev
 ```
 
 The server should be available at <http://127.0.0.1:5003>.
+
+### Seed demo data
+
+After MongoDB is running, create the demo admin, active quizzes, reward, and mission:
+
+```bash
+cd server
+npm run seed
+```
+
+The seeded admin can create quizzes and activate/deactivate them. Normal users can only access their own dashboard, active quizzes, points, badges, rewards, and leaderboard.
 
 ## Users API
 
@@ -206,4 +219,3 @@ You can also stop server processes started with Node or Nodemon:
 sudo pkill -f "nodemon src/server.js"
 sudo pkill -f "node src/server.js"
 ```
-

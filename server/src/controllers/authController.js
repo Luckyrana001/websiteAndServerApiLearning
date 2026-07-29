@@ -34,6 +34,7 @@ async function register(req, res) {
       name: name.trim(),
       email: normalisedEmail,
       password: await bcrypt.hash(password, 12),
+      role: "normal",
     };
 
     if (age !== undefined && age !== null && age !== "") {

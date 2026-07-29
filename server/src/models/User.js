@@ -23,6 +23,23 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
 
+    role: {
+      type: String,
+      enum: ["normal", "admin"],
+      default: "normal",
+    },
+
+    points: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
+    badges: [{
+      type: String,
+      trim: true,
+    }],
+
     age: {
       type: Number,
       min: [0, "Age cannot be negative"],

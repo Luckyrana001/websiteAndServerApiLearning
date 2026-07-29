@@ -5,6 +5,7 @@ function createAccessToken(user) {
     {
       sub: user._id.toString(),
       email: user.email,
+      role: user.role,
     },
     process.env.JWT_SECRET,
     {

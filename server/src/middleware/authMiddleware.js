@@ -28,3 +28,16 @@ function authenticateToken(req, res, next) {
 }
 
 module.exports = authenticateToken;
+
+function requireAdmin(req, res, next) {
+  if (req.auth?.role !== "admin") {
+    return res.status(403).json({
+      success: false,
+      message: "Admin access is required",
+    });
+  }
+
+  return next();
+}
+
+module.exports.requireAdmin = requireAdmin;

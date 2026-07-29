@@ -82,6 +82,98 @@ body {
 .dashboard-shell {
   min-height: 100svh;
   text-align: left;
+  background: linear-gradient(180deg, #f8fbff 0%, #f3f6fb 55%, #eef2f7 100%);
+}
+
+.dashboard-shell .MuiAppBar-root {
+  background: rgba(15, 32, 61, 0.96);
+  backdrop-filter: blur(14px);
+}
+
+.metric-card,
+.side-panel,
+.dashboard-shell .MuiCard-root {
+  border: 1px solid rgba(143, 164, 194, 0.22);
+  border-radius: 20px;
+  box-shadow: 0 14px 32px rgba(31, 52, 84, 0.08);
+}
+
+.metric-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
+}
+
+.side-panel {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.badge-tile {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-h);
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.badge-tile .badge-image {
+  display: block;
+  width: 36px !important;
+  height: 36px !important;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.leaderboard-tile,
+.reward-row,
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 7px 9px;
+  border-radius: 14px;
+  background: #f7f9fd;
+}
+
+.leaderboard-tile.gold { background: linear-gradient(90deg, #fff5cd, #fffaf0); }
+.leaderboard-tile.silver { background: linear-gradient(90deg, #edf1f7, #fafcff); }
+.leaderboard-tile.bronze { background: linear-gradient(90deg, #fce7d7, #fffaf7); }
+
+.rank-number {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #7890b0;
+  font-weight: 900;
+}
+
+.gold .rank-number { background: #e7a91e; }
+.silver .rank-number { background: #91a2b8; }
+.bronze .rank-number { background: #c57a4b; }
+
+.progress-row,
+.reward-row {
+  justify-content: space-between;
+}
+
+.progress-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #36b37e;
+  box-shadow: 0 0 0 5px rgba(54, 179, 126, 0.12);
 }
 
 h1,

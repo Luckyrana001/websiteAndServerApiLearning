@@ -1,5 +1,6 @@
 const express = require("express");
 const authenticateToken = require("../middleware/authMiddleware");
+const { requireAdmin } = require("../middleware/authMiddleware");
 
 const {
   getUsers,
@@ -11,6 +12,7 @@ const {
 const router = express.Router();
 
 router.use(authenticateToken);
+router.use(requireAdmin);
 
 router.get("/", getUsers);
 router.post("/", createUser);
