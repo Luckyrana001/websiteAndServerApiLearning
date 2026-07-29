@@ -4,8 +4,8 @@ A learning project containing a React client and an Express/MongoDB API server.
 
 ## Local URLs
 
-- API server: <http://127.0.0.1:5003>
-- Users API: <http://127.0.0.1:5003/api/users>
+- API server: [http://127.0.0.1:5003](http://127.0.0.1:5003)
+- Users API: [http://127.0.0.1:5003/api/users](http://127.0.0.1:5003/api/users)
 
 ## Project Structure
 
@@ -91,7 +91,7 @@ From the project root:
 npm run dev
 ```
 
-The server should be available at <http://127.0.0.1:5003>.
+The server should be available at [http://127.0.0.1:5003](http://127.0.0.1:5003).
 
 ### Seed demo data
 
@@ -131,7 +131,7 @@ Login uses `POST /api/auth/login` with `email` and `password`. All `/api/users` 
 
 ### Get all users
 
-Open <http://127.0.0.1:5003/api/users> in a browser or run:
+Open [http://127.0.0.1:5003/api/users](http://127.0.0.1:5003/api/users) in a browser or run:
 
 ```bash
 curl http://127.0.0.1:5003/api/users \
@@ -192,6 +192,24 @@ After both applications are running, open the client URL shown in the terminal.
 
 ![Mongo Db data view](image/README/mongo_db_image.png)
 
+# Login / Registration
+
+Anyone can do login and create user by Register page
+
+![login view](image/README/login.png)
+
+# Customer Dashboard
+
+![login view](image/README/customer_dash.png)
+
+# Admin Dashboard
+
+User Name - admin@example.com
+
+password - Admin@12345
+
+
+![admin view](image/README/admin_dash.png)
 
 ## Troubleshooting
 
