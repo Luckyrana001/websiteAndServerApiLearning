@@ -192,7 +192,7 @@ After both applications are running, open the client URL shown in the terminal.
 
 ![Users API response](image/README/1785212370742.png)
 
-![Client and server running](image/README/1785215284784.png)
+# Mongo Db Compass View
 
 ![Mongo Db data view](image/README/mongo_db_image.png)
 
