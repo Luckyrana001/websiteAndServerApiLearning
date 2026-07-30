@@ -1,201 +1,64 @@
-const mongoose = require("mongoose");
-const User = require("../models/User");
+const STATUS = require("../constants/httpStatus");
+const userService = require("../services/userService");
+const { sendSuccess } = require("../utils/responseHandler");
 
-async function getUsers(req, res) {
+async function getUsers(_req, res, next) {
   try {
-    const users = await User.find().sort({
-      createdAt: -1,
-    });
-
-    return res.status(200).json({
-      success: true,
-      count: users.length,
-      users,
-    });
+    const users = await userService.listUsers();
+    return sendSuccess(res, STATUS.OK, { count: users.length, users });
   } catch (error) {
-    console.error("Get users error:", error);
-
-    return res.status(500).json({
-      success: false,
-      message: "Unable to load users",
-      error: error.message,
-    });
+    return next(error);
   }
 }
 
-async function createUser(req, res) {
+async function createUser(req, res, next) {
   try {
-    const { name, email, age } = req.body;
-
-    if (!name?.trim() || !email?.trim()) {
-      return res.status(400).json({
-        success: false,
-        message: "Name and email are required",
-      });
-    }
-
-    const normalisedEmail = email.trim().toLowerCase();
-
-    const existingUser = await User.findOne({
-      email: normalisedEmail,
-    });
-
-    if (existingUser) {
-      return res.status(409).json({
-        success: false,
-        message: "A user with this email already exists",
-      });
-    }
-
-    const userData = {
-      name: name.trim(),
-      email: normalisedEmail,
-    };
-
-    if (age !== undefined && age !== null && age !== "") {
-      userData.age = Number(age);
-    }
-
-    const user = await User.create(userData);
-
-    return res.status(201).json({
-      success: true,
+    const user = await userService.createUser(req.body);
+    return sendSuccess(res, STATUS.CREATED, {
       message: "User created successfully",
       user,
     });
   } catch (error) {
-    console.error("Create user error:", error);
-
-    return handleControllerError(res, error, "Unable to create user");
+    return next(error);
   }
 }
 
-async function updateUser(req, res) {
+async function updateUser(req, res, next) {
   try {
-    const { id } = req.params;
-    const { name, email, age } = req.body;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid user ID",
-      });
-    }
-
-    const user = await User.findById(id);
+    const user = await userService.updateUser(req.params.id, req.body);
 
     if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
+      const error = new Error("User not found");
+      error.statusCode = STATUS.NOT_FOUND;
+      return next(error);
     }
 
-    if (!name?.trim() || !email?.trim()) {
-      return res.status(400).json({
-        success: false,
-        message: "Name and email are required",
-      });
-    }
-
-    const normalisedEmail = email.trim().toLowerCase();
-
-    const duplicateUser = await User.findOne({
-      email: normalisedEmail,
-      _id: {
-        $ne: id,
-      },
-    });
-
-    if (duplicateUser) {
-      return res.status(409).json({
-        success: false,
-        message: "A user with this email already exists",
-      });
-    }
-
-    user.name = name.trim();
-    user.email = normalisedEmail;
-
-    if (age === undefined || age === null || age === "") {
-      user.age = undefined;
-    } else {
-      user.age = Number(age);
-    }
-
-    const updatedUser = await user.save();
-
-    return res.status(200).json({
-      success: true,
+    return sendSuccess(res, STATUS.OK, {
       message: "User updated successfully",
-      user: updatedUser,
+      user,
     });
   } catch (error) {
-    console.error("Update user error:", error);
-
-    return handleControllerError(res, error, "Unable to update user");
+    return next(error);
   }
 }
 
-async function deleteUser(req, res) {
+async function deleteUser(req, res, next) {
   try {
-    const { id } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid user ID",
-      });
-    }
-
-    const user = await User.findByIdAndDelete(id);
+    const user = await userService.deleteUser(req.params.id);
 
     if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
+      const error = new Error("User not found");
+      error.statusCode = STATUS.NOT_FOUND;
+      return next(error);
     }
 
-    return res.status(200).json({
-      success: true,
+    return sendSuccess(res, STATUS.OK, {
       message: "User deleted successfully",
       user,
     });
   } catch (error) {
-    console.error("Delete user error:", error);
-
-    return handleControllerError(res, error, "Unable to delete user");
+    return next(error);
   }
 }
 
-function handleControllerError(res, error, defaultMessage) {
-  if (error.name === "ValidationError") {
-    const firstError = Object.values(error.errors)[0];
-
-    return res.status(400).json({
-      success: false,
-      message: firstError.message,
-    });
-  }
-
-  if (error.code === 11000) {
-    return res.status(409).json({
-      success: false,
-      message: "A user with this email already exists",
-    });
-  }
-
-  return res.status(500).json({
-    success: false,
-    message: defaultMessage,
-    error: error.message,
-  });
-}
-
-module.exports = {
-  getUsers,
-  createUser,
-  updateUser,
-  deleteUser,
-};
+module.exports = { getUsers, createUser, updateUser, deleteUser };
