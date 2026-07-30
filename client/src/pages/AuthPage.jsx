@@ -55,17 +55,17 @@ export default function AuthPage({ mode = "login" }) {
   const alternateLabel = isRegistering ? "Already have an account? Log in" : "Need an account? Register";
 
   return (
-    <Box sx={{ minHeight: "100svh", display: "grid", placeItems: "center", p: { xs: 2, sm: 5 }, bgcolor: "#071426", backgroundImage: "radial-gradient(circle at 12% 10%, rgba(62,128,255,.25), transparent 32%), radial-gradient(circle at 90% 90%, rgba(0,217,174,.16), transparent 28%)" }}>
+    <Box sx={{ minHeight: "100svh", display: "grid", placeItems: "center", p: { xs: 2, sm: 5 }, bgcolor: "#1d224e", backgroundImage: "radial-gradient(circle at 12% 10%, rgba(53,230,225,.16), transparent 32%), radial-gradient(circle at 90% 90%, rgba(255,0,132,.2), transparent 32%)" }}>
       <Container maxWidth="lg" sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1fr) 480px" }, alignItems: "center", gap: { xs: 4, md: 10, lg: 15 } }}>
         <Box sx={{ position: "relative", minHeight: { xs: "auto", md: 560 }, py: 4, color: "#fff", overflow: "hidden" }}>
-          <Typography sx={{ color: "#67e8d2", fontSize: 14, fontWeight: 900, letterSpacing: 3 }}>QUIZFORGE</Typography>
+          <Typography sx={{ color: "#35e6e1", fontSize: 14, fontWeight: 900, letterSpacing: 3 }}>YESQUIZ<span style={{ color: "#ff0084" }}>.</span></Typography>
           <Typography variant="h2" component="h1" sx={{ maxWidth: 620, my: 3, color: "#fff", fontSize: { xs: 48, md: 76 }, lineHeight: .98, letterSpacing: "-0.06em" }}>
-            Learn fast.<br />Earn your place.
+            Play smart.<br />Earn your place.
           </Typography>
           <Typography sx={{ maxWidth: 430, color: "#a9bad3", fontSize: 18, lineHeight: 1.6 }}>
             A focused space for challenges, progress, rewards, and friendly competition.
           </Typography>
-          <Box sx={{ display: { xs: "none", md: "block" }, position: "absolute", right: "3%", bottom: 80, width: 250, height: 250 }}><Box sx={{ position: "absolute", inset: 0, border: "1px solid rgba(103,232,210,.26)", borderRadius: "50%", transform: "rotate(24deg) scaleX(1.8)" }} /><Box sx={{ position: "absolute", inset: 0, border: "1px solid rgba(91,137,255,.3)", borderRadius: "50%", transform: "rotate(-36deg) scaleX(1.8)" }} /><Box sx={{ position: "absolute", inset: 82, display: "grid", placeItems: "center", border: "1px solid rgba(103,232,210,.6)", borderRadius: "50%", color: "#67e8d2", bgcolor: "rgba(103,232,210,.08)", fontSize: 42, boxShadow: "0 0 70px rgba(103,232,210,.2)" }}>★</Box></Box>
+          <Box sx={{ display: { xs: "none", md: "block" }, position: "absolute", right: "3%", bottom: 80, width: 250, height: 250 }}><Box sx={{ position: "absolute", inset: 0, border: "1px solid rgba(53,230,225,.3)", borderRadius: "50%", transform: "rotate(24deg) scaleX(1.8)" }} /><Box sx={{ position: "absolute", inset: 0, border: "1px solid rgba(255,0,132,.45)", borderRadius: "50%", transform: "rotate(-36deg) scaleX(1.8)" }} /><Box sx={{ position: "absolute", inset: 82, display: "grid", placeItems: "center", border: "1px solid rgba(53,230,225,.8)", borderRadius: "50%", color: "#35e6e1", bgcolor: "rgba(53,230,225,.08)", fontSize: 42, boxShadow: "0 0 70px rgba(53,230,225,.18)" }}>★</Box></Box>
           <Stack direction="row" spacing={3} sx={{ mt: { xs: 4, md: 0 }, position: { md: "absolute" }, bottom: { md: 22 }, left: 0 }}>{[["5k+", "players"], ["120+", "challenges"], ["4.9", "community rating"]].map(([value, label]) => <Box key={label} sx={{ display: "flex", flexDirection: "column", minWidth: 100 }}><Typography sx={{ color: "#fff", fontSize: 22, fontWeight: 800 }}>{value}</Typography><Typography sx={{ color: "#7890ad", fontSize: 12 }}>{label}</Typography></Box>)}</Stack>
         </Box>
         <Card elevation={0} sx={{ borderRadius: 4, bgcolor: "background.paper", boxShadow: "0 28px 80px rgba(0,0,0,.3)" }}>
@@ -76,7 +76,7 @@ export default function AuthPage({ mode = "login" }) {
                   {isRegistering ? "Join the community" : "Welcome back"}
                 </Typography>
                 <Typography variant="h3" component="h1" fontWeight={900} sx={{ my: 1, fontSize: { xs: 32, sm: 42 } }}>
-                  {isRegistering ? "Create your account" : "Sign in to QuizForge"}
+                  {isRegistering ? "Create your account" : "Sign in to YesQuiz"}
                 </Typography>
                 <Typography color="text.secondary">
                   {isRegistering
