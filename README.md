@@ -1,4 +1,4 @@
-# Sample Web-page with login,registration , dashboard with customer Form (Add,Update,Delete Operation through Api)  and Server side API development using jwt token
+Web-page with login,registration , dashboard with customer Form (Add,Update,Delete Operation through Api)  and Server side API development using jwt token
 
 A learning project containing a React client and an Express/MongoDB API server.
 
